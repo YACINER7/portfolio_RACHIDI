@@ -1,0 +1,92 @@
+---
+import Section from '@/components/Section.astro'
+import { work } from '@cv'
+import { Icon } from 'astro-icon/components'
+---
+
+<Section className={Astro.props.className} title="Expériences">
+  <div id="contact" class="space-y-6">
+    
+    <div class="space-y-6">
+      <div class="bg-skin-button-accent/10 p-6 rounded-lg border-l-4 border-skin-hue">
+        <div class="flex flex-col md:flex-row md:items-start md:justify-between mb-4">
+          <div>
+            <h4 class="text-lg font-semibold text-skin-base">Développeur Fullstack - Stage</h4>
+            <p class="text-skin-hue font-medium">Ministère de l'Économie, des Finances et de la Souveraineté industrielle et numérique (MEFSIN)</p>
+            <p class="text-sm text-skin-muted">Bercy Hub - Service du Numérique (SNUM)</p>
+          </div>
+          <span class="text-sm text-skin-muted bg-skin-hue/10 px-3 py-1 rounded-full mt-2 md:mt-0">
+            Février - Avril 2025
+          </span>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <h5 class="text-base font-semibold text-skin-base mb-2">🎯 Projet principal : VeilleSociale</h5>
+            <p class="text-skin-muted text-sm leading-relaxed">
+              Automatisation de la collecte et l'analyse des tracts syndicaux publiés en ligne pour aider 
+              l'administration à mieux comprendre le climat social.
+            </p>
+          </div>
+
+          <div>
+            <h5 class="text-base font-semibold text-skin-base mb-2">🛠️ Missions réalisées</h5>
+            <ul class="text-sm text-skin-muted space-y-1">
+              <li>• <strong>Reprise de projet :</strong> Diagnostic et correction des scripts de scraping, remise en service du pipeline</li>
+              <li>• <strong>Nouvelles fonctionnalités :</strong> Conversion automatique PDF/images en texte (OCR), développement front-end</li>
+              <li>• <strong>Optimisation :</strong> Filtrage, détection de doublons, extraction intelligente des dates</li>
+            </ul>
+          </div>
+
+          <div>
+            <h5 class="text-base font-semibold text-skin-base mb-2">💻 Technologies utilisées</h5>
+            <div class="flex flex-wrap gap-2">
+              <span class="bg-skin-hue/10 text-skin-base px-2 py-1 rounded text-xs">Python</span>
+              <span class="bg-skin-hue/10 text-skin-base px-2 py-1 rounded text-xs">PostgreSQL</span>
+              <span class="bg-skin-hue/10 text-skin-base px-2 py-1 rounded text-xs">Scrapy</span>
+              <span class="bg-skin-hue/10 text-skin-base px-2 py-1 rounded text-xs">GitHub</span>
+              <span class="bg-skin-hue/10 text-skin-base px-2 py-1 rounded text-xs">Docling</span>
+              <span class="bg-skin-hue/10 text-skin-base px-2 py-1 rounded text-xs">OCR</span>
+            </div>
+          </div>
+
+          <div>
+            <h5 class="text-base font-semibold text-skin-base mb-2">🚀 Apports du stage</h5>
+            <ul class="text-sm text-skin-muted space-y-1">
+              <li>• Forte montée en compétences techniques (scraping, traitement de données, architecture logicielle)</li>
+              <li>• Découverte des technologies de traitement de données avancées et intégration dans des outils métiers</li>
+              <li>• Évolution de la posture étudiante vers une posture professionnelle</li>
+              <li>• Travail en équipe multidisciplinaire dans un environnement bienveillant</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="border-l-4 border-skin-hue pl-4">
+        <p class="text-sm text-skin-muted italic">
+          💡 <strong>Impact :</strong> Ce stage a renforcé mon envie de poursuivre en BUT3 en alternance, 
+          avec une spécialisation en data/IA, et m'a donné une vision concrète du développement en entreprise.
+        </p>
+      </div>
+    </div>
+  </div>
+</Section>
+
+<script>
+  const expandButton = document.querySelectorAll('.expand-button');
+
+  expandButton.forEach(button => {
+    button.addEventListener('click', () => {
+      const container = button.closest<HTMLElement>('.expand-container')!;
+      container.dataset.expanded = container.dataset.expanded === 'true' ? 'false' : 'true';
+      const expandText = button.querySelector('.expand-text')!;
+      expandText.innerHTML = container.dataset.expanded === 'true' ? 'Show less' : 'Show more'
+    });
+  });
+</script>
+
+<style>
+  li::marker {
+    @apply text-skin-hue
+  }
+</style>
