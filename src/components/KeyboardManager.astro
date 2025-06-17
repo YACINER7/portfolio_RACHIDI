@@ -43,11 +43,7 @@ const profilesInfo = profiles.map(({ network, url }) => {
 })
 ---
 
-<footer id='normal-footer' class='print:hidden flex flex-col gap-2'>
-  <div>
-    Press <kbd>Cmd</kbd> + <kbd>K</kbd> to open the command palette.
-  </div>
-</footer>
+
 <div class='footer-button print:hidden'>
   <Icon name='ri:command-fill' width={20} height={20} class="text-skin-hue"/>
 </div>
@@ -158,22 +154,7 @@ const profilesInfo = profiles.map(({ network, url }) => {
     }
   }
 
-  footer {
-    @apply bg-skin-button-accent;
-    position: fixed;
-    bottom: 0px;
-    width: 100%;
-    padding-block: 8px;
-    text-align: center;
-    font-size: 0.85rem;
 
-    view-timeline-name: --revealing;
-    view-timeline-axis: block;
-
-    animation: linear 0.3s fadeIn;
-    animation-timeline: --revealing;
-    animation-range: entry 100% cover 10%;
-  }
   kbd {
     @apply bg-skin-muted;
     border-radius: 4px;
