@@ -7,17 +7,6 @@
   <div class="separator-bar">
     <!-- Barre de progression -->
     <div class="progress-bar" id="progress-bar"></div>
-    
-    <!-- Points de navigation -->
-    <div class="nav-dots">
-      <div class="nav-dot" data-target="presentation" title="Présentation"></div>
-      <div class="nav-dot" data-target="competences" title="Compétences"></div>
-      <div class="nav-dot" data-target="projets" title="Projets"></div>
-      <div class="nav-dot" data-target="experience" title="Expérience"></div>
-      <div class="nav-dot" data-target="talents" title="Talents"></div>
-      <div class="nav-dot" data-target="formation" title="Formation"></div>
-      <div class="nav-dot" data-target="ambitions" title="Ambitions"></div>
-    </div>
   </div>
 </div>
 
@@ -62,72 +51,7 @@
     box-shadow: 0 0 15px rgba(var(--color-hue-rgb), 0.6);
   }
 
-  .nav-dots {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    pointer-events: auto;
-  }
-
-  .nav-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--color-fill);
-    border: 2px solid var(--color-hue);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .nav-dot:hover {
-    transform: scale(1.3);
-    background: var(--color-hue);
-    box-shadow: 0 0 20px rgba(var(--color-hue-rgb), 0.8);
-  }
-
-  .nav-dot.active {
-    background: var(--color-hue);
-    transform: scale(1.2);
-    box-shadow: 0 0 15px rgba(var(--color-hue-rgb), 0.6);
-  }
-
-
-
-  /* Animation de pulsation pour le point actif */
-  .nav-dot.active::before {
-    content: '';
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background: var(--color-hue);
-    opacity: 0.3;
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0% {
-      transform: scale(1);
-      opacity: 0.3;
-    }
-    50% {
-      transform: scale(1.5);
-      opacity: 0.1;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 0.3;
-    }
-  }
+  
 
   /* Responsive */
   @media (max-width: 768px) {
@@ -140,57 +64,9 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const progressBar = document.getElementById('progress-bar');
-    const navDots = document.querySelectorAll('.nav-dot');
     const rightPanel = document.getElementById('right-panel');
     
     if (!rightPanel || !progressBar) return;
-
-    // Sections à observer
-    const sections = [
-      'presentation',
-      'competences', 
-      'projets',
-      'experience',
-      'talents',
-      'formation',
-      'ambitions'
-    ];
-
-    // Fonction pour mettre à jour la section active
-    function updateActiveSection() {
-      if (!rightPanel) return;
-      
-      const scrollTop = rightPanel.scrollTop;
-      const rightPanelRect = rightPanel.getBoundingClientRect();
-      const centerY = rightPanelRect.top + rightPanelRect.height / 2;
-      
-      let activeSection = null;
-      let minDistance = Infinity;
-      
-      sections.forEach(sectionId => {
-        const section = document.getElementById(sectionId);
-        if (section) {
-          const sectionRect = section.getBoundingClientRect();
-          const sectionCenter = sectionRect.top + sectionRect.height / 2;
-          const distance = Math.abs(centerY - sectionCenter);
-          
-          if (distance < minDistance && sectionRect.top < centerY && sectionRect.bottom > centerY) {
-            minDistance = distance;
-            activeSection = sectionId;
-          }
-        }
-      });
-      
-      // Mettre à jour les points actifs
-      navDots.forEach(dot => {
-        const target = dot.getAttribute('data-target');
-        if (target === activeSection) {
-          dot.classList.add('active');
-        } else {
-          dot.classList.remove('active');
-        }
-      });
-    }
 
     // Mise à jour de la barre de progression
     function updateProgressBar() {
@@ -203,39 +79,12 @@
       progressBar.style.height = Math.min(Math.max(scrollPercent, 0), 100) + '%';
     }
 
-    // Fonction combinée pour le scroll
-    function handleScroll() {
-      updateProgressBar();
-      updateActiveSection();
-    }
-
     // Écouter le scroll sur le panneau de droite
-    rightPanel.addEventListener('scroll', handleScroll);
-
-    // Navigation au clic sur les points
-    navDots.forEach(dot => {
-      dot.addEventListener('click', () => {
-        const targetId = dot.getAttribute('data-target');
-        const targetSection = document.getElementById(targetId);
-        
-        if (targetSection && rightPanel) {
-          // Calculer la position relative dans le panneau de droite
-          const rightPanelRect = rightPanel.getBoundingClientRect();
-          const targetRect = targetSection.getBoundingClientRect();
-          const scrollTop = rightPanel.scrollTop;
-          const targetPosition = targetRect.top - rightPanelRect.top + scrollTop - 50;
-          
-          rightPanel.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
+    rightPanel.addEventListener('scroll', updateProgressBar);
 
     // Initialisation
     setTimeout(() => {
-      handleScroll();
+      updateProgressBar();
     }, 300);
   });
 </script> 
